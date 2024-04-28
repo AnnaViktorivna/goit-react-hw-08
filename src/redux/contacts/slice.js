@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { apiGetContacts } from "./operations";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { apiAddContacts, apiGetContacts } from "./operations";
 
 const INITIAL_STATE = {
   contacts: null,
@@ -13,18 +13,30 @@ export const contactsSlice = createSlice({
   initialState: INITIAL_STATE, // Об'єкт редюсерів
   extraReducers: (builders) => {
     builders
-      .addCase(apiGetContacts.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+
       .addCase(apiGetContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.contacts = action.payload;
       })
-      .addCase(apiGetContacts.rejected, (state) => {
+      .addCase(apiAddContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isError = true;
-      });
+        state.contacts.push(action.payload);
+        // state.contacts = [...state.contacts, action.payload];
+      })
+      .addMatcher(
+        isAnyOf(apiGetContacts.pending, apiAddContacts.pending),
+        (state) => {
+          state.isLoading = true;
+          state.isError = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(apiGetContacts.rejected, apiAddContacts.rejected),
+        (state) => {
+          state.isLoading = false;
+          state.isError = true;
+        }
+      );
   },
 });
 
