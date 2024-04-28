@@ -1,9 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 
 import {
   fetchApiRegister,
   fetchApiLogIn,
   fetchApiRefreshUser,
+  apiLogOut,
 } from "./operations";
 
 const INITIAL_STATE = {
@@ -20,47 +21,55 @@ export const authSlice = createSlice({
   initialState: INITIAL_STATE, // Об'єкт редюсерів
   extraReducers: (builders) => {
     builders
-      .addCase(fetchApiRegister.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+
       .addCase(fetchApiRegister.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
         state.userData = action.payload.user;
         state.token = action.payload.token;
       })
-      .addCase(fetchApiRegister.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
-      .addCase(fetchApiLogIn.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+
       .addCase(fetchApiLogIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
         state.userData = action.payload.user;
         state.token = action.payload.token;
       })
-      .addCase(fetchApiLogIn.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
-      .addCase(fetchApiRefreshUser.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+
       .addCase(fetchApiRefreshUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
         state.userData = action.payload;
       })
-      .addCase(fetchApiRefreshUser.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
-      });
+
+      .addCase(apiLogOut.fulfilled, () => {
+        return INITIAL_STATE;
+      })
+
+      .addMatcher(
+        isAnyOf(
+          apiLogOut.pending,
+          fetchApiRefreshUser.pending,
+          fetchApiLogIn.pending,
+          fetchApiRegister.pending
+        ),
+        (state) => {
+          state.isLoading = true;
+          state.isError = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          apiLogOut.rejected,
+          fetchApiRefreshUser.rejected,
+          fetchApiLogIn.rejected,
+          fetchApiRegister.rejected
+        ),
+        (state) => {
+          state.isLoading = false;
+          state.isError = true;
+        }
+      );
   },
 });
 

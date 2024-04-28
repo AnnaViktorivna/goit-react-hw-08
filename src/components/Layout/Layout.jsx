@@ -3,12 +3,22 @@ import clsx from "clsx";
 
 import css from "../../App.module.css";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { selectIsLoggedIn, selectUserData } from "../../redux/auth/selectors";
+import { apiLogOut } from "../../redux/auth/operations";
+
+import { useDispatch } from "react-redux";
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
 };
 const Layout = ({ children }) => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const userDate = useSelector(selectUserData);
+
+  const onLogout = () => {
+    dispatch(apiLogOut());
+  };
+
   return (
     <div>
       <header>
@@ -21,6 +31,13 @@ const Layout = ({ children }) => {
               <NavLink to='/contacts' className={buildLinkClass}>
                 Contacts
               </NavLink>
+
+              <div>
+                <span>Hi , {userDate.name}</span>
+                <button onClick={onLogout} type='button'>
+                  Logout
+                </button>
+              </div>
             </>
           ) : (
             <>

@@ -8,6 +8,8 @@ import Layout from "./components/Layout/Layout";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchApiRefreshUser } from "./redux/auth/operations";
+import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,9 +22,30 @@ function App() {
     <Layout>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/contacts' element={<ContactsPage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/register' element={<RegisterPage />} />
+        <Route
+          path='/contacts'
+          element={
+            <PrivateRoute>
+              <ContactsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/login'
+          element={
+            <RestrictedRoute>
+              <LoginPage />
+            </RestrictedRoute>
+          }
+        />
+        <Route
+          path='/register'
+          element={
+            <RestrictedRoute>
+              <RegisterPage />
+            </RestrictedRoute>
+          }
+        />
       </Routes>
     </Layout>
   );
