@@ -37,32 +37,43 @@ const RegisterForm = () => {
 
   return (
     <div>
-      <h1>Registration</h1>
-      <p>Please enter your email and password for registration 😊</p>
+      <h1 className={css.titleRegistration}>Welcome at registration</h1>
+      {/* <p className={css.}>Please enter your email and password for registration 😊</p> */}
       <Formik
         initialValues={INITIAL_VALUES}
         validationSchema={RegisterBoxSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <label>
-            <span>Name</span>
+        <Form className={css.form}>
+          <label className={css.label}>
+            <span className={css.span}>Name</span>
             <br />
-            <Field type='name' name='name' placeholder='Maria Koval' />
+            <Field
+              className={css.input}
+              type='name'
+              name='name'
+              placeholder='Maria Koval'
+            />
             <ErrorMessage name='name' component='div' />
           </label>
           <br />
-          <label>
-            <span>Email</span>
+          <label className={css.label}>
+            <span className={css.span}>Email</span>
             <br />
-            <Field type='email' name='email' placeholder='test@g.com' />
+            <Field
+              className={css.input}
+              type='email'
+              name='email'
+              placeholder='test@g.com'
+            />
             <ErrorMessage name='email' component='div' />
           </label>
           <br />
-          <label>
-            <span>Password</span>
+          <label className={css.label}>
+            <span className={css.span}>Password</span>
             <br />
             <Field
+              className={css.input}
               type='password'
               name='password'
               placeholder='Enter strong password'

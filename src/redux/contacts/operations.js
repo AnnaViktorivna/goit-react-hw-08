@@ -27,3 +27,16 @@ export const apiAddContacts = createAsyncThunk(
     }
   }
 );
+
+export const apiDeleteContacts = createAsyncThunk(
+  "contacts/deleteContact",
+  async (contactId, thunkApi) => {
+    try {
+      const { data } = await instance.delete(`/contacts/${contactId}`);
+      console.log("Add Contacts data", data);
+      return data;
+    } catch (e) {
+      return thunkApi.rejectWithValue(e.message);
+    }
+  }
+);

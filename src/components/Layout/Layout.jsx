@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
+import { useDispatch } from "react-redux";
 
-import css from "../../App.module.css";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUserData } from "../../redux/auth/selectors";
 import { apiLogOut } from "../../redux/auth/operations";
 
-import { useDispatch } from "react-redux";
+import css from "../../App.module.css";
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
 };
@@ -32,9 +32,9 @@ const Layout = ({ children }) => {
                 Contacts
               </NavLink>
 
-              <div>
-                <span>Hi , {userDate.name}</span>
-                <button onClick={onLogout} type='button'>
+              <div className={css.user}>
+                <span className={css.span}>Hi , {userDate.name}</span>
+                <button className={css.button} onClick={onLogout} type='button'>
                   Logout
                 </button>
               </div>

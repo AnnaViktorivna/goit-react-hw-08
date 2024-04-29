@@ -1,11 +1,21 @@
 .nav {
   display: flex;
-  gap: 4px;
+  gap: 24px;
+  font-size: 55px;
+  background-color: #98e4ff;
 }
-
+:first-child:link {
+  padding-left: 50px;
+}
 .link {
+  margin: 0 auto;
   color: black;
   text-decoration: none;
+  border: 1px solid whitesmoke;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  padding: 8px;
+  border-radius: 8px;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .link:hover {
@@ -13,5 +23,30 @@
 }
 
 .active {
-  color: orange;
+  color: gray;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid black;
+}
+.span {
+  color: rgb(21, 7, 20);
+  font-size: 20px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.button {
+  background-color: #792099;
+  color: white;
+  border: 1px solid #792099;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px 0px;
+  cursor: pointer;
+  font-size: 20px;
+  width: 100%;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }

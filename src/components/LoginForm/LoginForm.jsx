@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { fetchApiLogIn } from "../../redux/auth/operations";
-
+import css from "../RegisterForm/RegisterForm.module.css";
 const loginBoxSchema = Yup.object().shape({
   email: Yup.string()
     .matches(
@@ -30,28 +30,34 @@ const LoginForm = () => {
 
   return (
     <div>
-      <h1>Login To Your Account 👇 </h1>
+      <h1 className={css.titleRegistration}>Login To Your Account 👇 </h1>
 
       <Formik
         initialValues={INITIAL_VALUES}
         validationSchema={loginBoxSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <label>
-            <span>Email</span>
+        <Form className={css.form}>
+          <label className={css.label}>
+            <span className={css.span}>Email</span>
             <br />
-            <Field type='email' name='email' placeholder='test@g.com' />
+            <Field
+              className={css.input}
+              type='email'
+              name='email'
+              placeholder='Enter your email'
+            />
             <ErrorMessage name='email' component='div' />
           </label>
           <br />
-          <label>
-            <span>Password</span>
+          <label className={css.label}>
+            <span className={css.span}>Password</span>
             <br />
             <Field
+              className={css.input}
               type='password'
               name='password'
-              placeholder='Enter strong password'
+              placeholder='Enter your password'
             />
             <ErrorMessage name='password' component='div' />
           </label>

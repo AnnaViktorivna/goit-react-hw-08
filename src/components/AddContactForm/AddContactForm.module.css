@@ -1,28 +1,12 @@
-.form {
-  width: 320px;
-}
-
 .label {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
-}
-
-body {
-  background: rgb(34, 193, 195);
-  background: linear-gradient(
-    0deg,
-    rgb(128, 230, 232) 0%,
-    rgb(222, 148, 248) 86%
-  );
-  background-attachment: fixed;
-  margin: 0;
-  font-family: "Poppins", sans-serif;
+  /* margin-bottom: 16px; */
 }
 
 .form {
-  width: 400px;
-  margin: 6vh auto 0 auto;
+  width: 320px;
+  margin: 0 auto;
   background-color: whitesmoke;
   border-radius: 5px;
   padding: 30px;
@@ -41,14 +25,16 @@ body {
   border: 1px solid #792099;
   border-radius: 5px;
   padding: 10px;
-  margin: 20px 0px;
   cursor: pointer;
   font-size: 20px;
-  width: 100%;
+  width: 300px;
+  margin: 0 auto;
 }
 
 .input {
+  width: 300px;
   display: flex;
+
   flex-direction: column;
   margin-bottom: 15px;
   border-radius: 5px;

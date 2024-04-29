@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { apiAddContacts } from "../../redux/contacts/operations";
-
+import css from "./AddContactForm.module.css";
 const ContactBoxSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
@@ -31,22 +31,27 @@ const AddContactForm = () => {
 
   return (
     <div>
-      <h2>Add new contact</h2>
+      <h2 className={css.titleRegistration}>Add new contact</h2>
       <Formik
         initialValues={INITIAL_VALUES}
         onSubmit={handleSubmit}
         validationSchema={ContactBoxSchema}
       >
-        <Form>
-          <span>Name</span>
-          <Field type='text' name='name' />
+        <Form className={css.form}>
+          <span className={css.span}>Name</span>
+          <br />
+          <Field className={css.input} type='text' name='name' />
           <ErrorMessage component='p' name='name' />
-
-          <span>Number</span>
-          <Field type='text' name='number' />
+          <br />
+          <span className={css.span}>Number</span>
+          <br />
+          <Field className={css.input} type='text' name='number' />
           <ErrorMessage component='p' name='number' />
-
-          <button type='submit'>Add contact</button>
+          <br />
+          <button className={css.button} type='submit'>
+            Add contact
+          </button>
+          <br />
         </Form>
       </Formik>
     </div>
